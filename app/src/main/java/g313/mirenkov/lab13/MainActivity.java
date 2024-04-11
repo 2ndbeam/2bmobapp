@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView txt_x, txt_y, txt_out;
+    Switch swc_rad;
+    boolean rad = false;
     final String url = "https://sbmobapi.shuttleapp.rs/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         txt_x = findViewById(R.id.txt_x);
         txt_y = findViewById(R.id.txt_y);
         txt_out = findViewById(R.id.txt_out);
+        swc_rad = findViewById(R.id.swc_rad);
     }
 
     public void button_send_request(View v) {
@@ -40,4 +44,7 @@ public class MainActivity extends AppCompatActivity {
         r.make_request("");
     }
 
+    public void switch_radians(View v) {
+        rad = swc_rad.isChecked();
+    }
 }

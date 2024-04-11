@@ -93,6 +93,7 @@
             android:layout_marginTop="15pt"
             android:layout_marginBottom="5pt"
             android:layout_weight="1"
+            android:onClick="button_send_request"
             android:text="@string/btn_add" />
 
         <Button
@@ -103,6 +104,7 @@
             android:layout_marginTop="15pt"
             android:layout_marginBottom="5pt"
             android:layout_weight="1"
+            android:onClick="button_send_request"
             android:text="@string/btn_sub" />
 
         <Button
@@ -113,6 +115,7 @@
             android:layout_marginTop="15pt"
             android:layout_marginBottom="5pt"
             android:layout_weight="1"
+            android:onClick="button_send_request"
             android:text="@string/btn_mul" />
 
         <Button
@@ -123,6 +126,7 @@
             android:layout_marginTop="15pt"
             android:layout_marginBottom="5pt"
             android:layout_weight="1"
+            android:onClick="button_send_request"
             android:text="@string/btn_sqr" />
     </LinearLayout>
 
@@ -137,6 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5pt"
             android:layout_weight="1"
+            android:onClick="button_send_request"
             android:text="@string/btn_div" />
 
         <Button
@@ -146,6 +151,7 @@
             android:layout_marginLeft="2pt"
             android:layout_marginBottom="5pt"
             android:layout_weight="1"
+            android:onClick="button_send_request"
             android:text="@string/btn_div2" />
 
         <Button
@@ -155,6 +161,7 @@
             android:layout_marginLeft="2pt"
             android:layout_marginBottom="5pt"
             android:layout_weight="1"
+            android:onClick="button_send_request"
             android:text="@string/btn_rem" />
 
         <Button
@@ -164,6 +171,7 @@
             android:layout_marginLeft="2pt"
             android:layout_marginBottom="5pt"
             android:layout_weight="1"
+            android:onClick="button_send_request"
             android:text="@string/btn_sqrt" />
     </LinearLayout>
 
@@ -177,6 +185,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="button_send_request"
             android:text="@string/btn_sin" />
 
         <Button
@@ -185,6 +194,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="2pt"
             android:layout_weight="1"
+            android:onClick="button_send_request"
             android:text="@string/btn_cos" />
 
         <Button
@@ -193,6 +203,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="2pt"
             android:layout_weight="1"
+            android:onClick="button_send_request"
             android:text="@string/btn_tan" />
 
         <Switch
@@ -201,6 +212,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="2pt"
             android:layout_weight="3.7"
+            android:onClick="switch_radians"
             android:text="@string/swc_rad"
             android:textAlignment="textEnd" />
     </LinearLayout>
