@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         String x = txt_x.getText().toString();
         String y = txt_y.getText().toString();
         String request_url = url;
+        Toast tst1 = Toast.makeText(this, "Error: x is not set.", Toast.LENGTH_LONG);
+        Toast tst2 = Toast.makeText(this, "Error: x or y are not set.", Toast.LENGTH_LONG);
         HttpRequest r = new HttpRequest(this) {
             @Override
             public void on_request_complete(String response) {
@@ -35,13 +38,16 @@ public class MainActivity extends AppCompatActivity {
                 txt_out.setText(response);
             }
         };
-        String button_id = getResources().getResourceName(v.getId());
+        String button_id = getResources().getResourceName(v.getId()).replace("g313.mirenkov.lab13:id/", "");
         switch(button_id) {
             case "btn_add":
-                request_url += String.format("add?first=%d&second=%d", x, y);
+                if (x.equals("") || y.equals("")) {
+                    tst1.show(); break;
+                }
+                request_url += String.format("add?first=%s&second=%s", x, y);
                 break;
         }
-        r.make_request("");
+        r.make_request(request_url);
     }
 
     public void switch_radians(View v) {
