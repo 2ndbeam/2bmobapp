@@ -17,4 +17,5 @@
     <string name="swc_rad">Rad</string>
     <string name="oper_hist">Operations history:\n</string>
     <string name="btn_hist">Operations history</string>
+    <string name="btn_back">Return</string>
 </resources>

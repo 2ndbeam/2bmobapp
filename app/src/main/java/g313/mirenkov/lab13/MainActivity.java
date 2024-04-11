@@ -2,6 +2,7 @@ package g313.mirenkov.lab13;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -229,5 +230,10 @@ public class MainActivity extends AppCompatActivity {
             history += String.format("%d.\t%s\n", i, g.db.select(String.valueOf(i)));
         }
         txt_hist.setText(history);
+    }
+
+    public void show_hist(View v) {
+        Intent i = new Intent(this, DatabaseActivity.class);
+        startActivity(i);
     }
 }
