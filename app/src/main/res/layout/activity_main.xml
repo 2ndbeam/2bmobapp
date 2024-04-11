@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="top"
         android:orientation="horizontal">
 
         <Button
@@ -32,7 +33,7 @@
         <TextView
             android:id="@+id/txt_hist"
             android:layout_width="match_parent"
-            android:layout_height="125pt"
+            android:layout_height="133pt"
             android:layout_weight="1"
             android:gravity="bottom"
             android:text="@string/oper_hist"

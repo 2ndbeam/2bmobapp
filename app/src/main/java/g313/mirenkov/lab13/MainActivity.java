@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        db = new database(this, "log.db", null, 2);
+        g.db = new database(this, "log.db", null, 2);
         txt_x = findViewById(R.id.txt_x);
         txt_y = findViewById(R.id.txt_y);
         txt_out = findViewById(R.id.txt_out);
@@ -216,17 +216,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void db_log(String response) {
         String text = String.format("%s = %s", operation, response);
-        db.insert(text);
+        g.db.insert(text);
         upd_hist();
     }
 
     public void upd_hist() {
         String history = getString(R.string.oper_hist);
         int limit = 10;
-        int rows_count = db.get_rows_count();
+        int rows_count = g.db.get_rows_count();
         if (rows_count < 10) limit = rows_count;
         for (int i = rows_count; i > rows_count - limit; i--) {
-            history += String.format("%d.\t%s\n", i, db.select(String.valueOf(i)));
+            history += String.format("%d.\t%s\n", i, g.db.select(String.valueOf(i)));
         }
         txt_hist.setText(history);
     }
