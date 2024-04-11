@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         Toast tst_one_arg = Toast.makeText(this, "Error: x is not set.", Toast.LENGTH_LONG);
         Toast tst_two_args = Toast.makeText(this, "Error: x or y are not set.", Toast.LENGTH_LONG);
         Toast tst_integer = Toast.makeText(this, "Error: x or y are not integer", Toast.LENGTH_LONG);
+        Toast tst_sign_arg = Toast.makeText(this, "Error: x or y contains only \"-\"", Toast.LENGTH_LONG);
+        Toast tst_sign_arg_one = Toast.makeText(this, "Error: x contains only \"-\"", Toast.LENGTH_LONG);
         HttpRequest r = new HttpRequest(this) {
             @Override
             public void on_request_complete(String response) {
@@ -49,67 +51,103 @@ public class MainActivity extends AppCompatActivity {
             case "btn_add":
                 if (x.equals("") || y.equals("")) {
                     tst_two_args.show();
-                    break;
+                    return;
+                }
+                if (x.equals("-") || y.equals("-")) {
+                    tst_sign_arg.show();
+                    return;
                 }
                 request_url += String.format("add?first=%s&second=%s", x, y);
                 break;
             case "btn_sub":
                 if (x.equals("") || y.equals("")) {
                     tst_two_args.show();
-                    break;
+                    return;
+                }
+                if (x.equals("-") || y.equals("-")) {
+                    tst_sign_arg.show();
+                    return;
                 }
                 request_url += String.format("sub?first=%s&second=%s", x, y);
                 break;
             case "btn_mul":
                 if (x.equals("") || y.equals("")) {
                     tst_two_args.show();
-                    break;
+                    return;
+                }
+                if (x.equals("-") || y.equals("-")) {
+                    tst_sign_arg.show();
+                    return;
                 }
                 request_url += String.format("mul?first=%s&second=%s", x, y);
                 break;
             case "btn_div":
                 if (x.equals("") || y.equals("")) {
                     tst_two_args.show();
-                    break;
+                    return;
+                }
+                if (x.equals("-") || y.equals("-")) {
+                    tst_sign_arg.show();
+                    return;
                 }
                 if (x.contains(".") || y.contains(".")) {
                     tst_integer.show();
-                    break;
+                    return;
                 }
                 request_url += String.format("div?first=%s&second=%s", x, y);
                 break;
             case "btn_div2":
                 if (x.equals("") || y.equals("")) {
                     tst_two_args.show();
-                    break;
+                    return;
+                }
+                if (x.equals("-") || y.equals("-")) {
+                    tst_sign_arg.show();
+                    return;
                 }
                 request_url += String.format("div2?first=%s&second=%s", x, y);
                 break;
             case "btn_rem":
                 if (x.equals("") || y.equals("")) {
                     tst_two_args.show();
-                    break;
+                    return;
+                }
+                if (x.equals("-") || y.equals("-")) {
+                    tst_sign_arg.show();
+                    return;
                 }
                 request_url += String.format("rem?first=%s&second=%s", x, y);
                 break;
             case "btn_sqr":
                 if (x.equals("")) {
                     tst_one_arg.show();
-                    break;
+                    return;
+                }
+                if (x.equals("-")) {
+                    tst_sign_arg_one.show();
+                    return;
                 }
                 request_url += String.format("sqr?arg=%s", x);
                 break;
             case "btn_sqrt":
                 if (x.equals("")) {
                     tst_one_arg.show();
-                    break;
+                    return;
+                }
+                if (x.equals("-")) {
+                    tst_sign_arg_one.show();
+                    return;
                 }
                 request_url += String.format("sqrt?arg=%s", x);
                 break;
             case "btn_sin":
                 if (x.equals("")) {
                     tst_one_arg.show();
-                    break;
+                    return;
+                }
+                if (x.equals("-")) {
+                    tst_sign_arg_one.show();
+                    return;
                 }
                 if (rad) {
                     request_url += String.format("sin/rad?arg=%s", x);
@@ -120,7 +158,11 @@ public class MainActivity extends AppCompatActivity {
             case "btn_cos":
                 if (x.equals("")) {
                     tst_one_arg.show();
-                    break;
+                    return;
+                }
+                if (x.equals("-")) {
+                    tst_sign_arg_one.show();
+                    return;
                 }
                 if (rad) {
                     request_url += String.format("cos/rad?arg=%s", x);
@@ -131,7 +173,11 @@ public class MainActivity extends AppCompatActivity {
             case "btn_tan":
                 if (x.equals("")) {
                     tst_one_arg.show();
-                    break;
+                    return;
+                }
+                if (x.equals("-")) {
+                    tst_sign_arg_one.show();
+                    return;
                 }
                 if (rad) {
                     request_url += String.format("tan/rad?arg=%s", x);
