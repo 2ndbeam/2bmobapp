@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">lab13</string>
+    <string name="lbl_x">Enter x:</string>
+    <string name="lbl_y">Enter y:</string>
+    <string name="btn_add">x + y</string>
+    <string name="btn_sub">x - y</string>
+    <string name="btn_mul">x * y</string>
+    <string name="btn_div">x / y</string>
+    <string name="btn_div2">x // y</string>
+    <string name="btn_rem">x % y</string>
+    <string name="btn_sqr">x^2</string>
+    <string name="btn_sqrt">sqrt(x)</string>
+    <string name="btn_sin">sin(x)</string>
+    <string name="btn_cos">cos(x)</string>
+    <string name="btn_tan">tan(x)</string>
+    <string name="swc_rad">Rad</string>
 </resources>
