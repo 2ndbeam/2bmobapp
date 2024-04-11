@@ -31,9 +31,7 @@ public class HttpRequest {
         }
     }
 
-    public void on_request_complete(String response) {
-
-    }
+    public void on_request_complete(String response) {}
 
     public void make_request(String endpoint) {
         Worker w = new Worker();

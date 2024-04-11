@@ -2,6 +2,7 @@
     <string name="app_name">lab13</string>
     <string name="lbl_x">Enter x:</string>
     <string name="lbl_y">Enter y:</string>
+    <string name="lbl_out">Answer:</string>
     <string name="btn_add">x + y</string>
     <string name="btn_sub">x - y</string>
     <string name="btn_mul">x * y</string>
