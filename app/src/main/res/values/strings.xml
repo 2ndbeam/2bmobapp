@@ -15,4 +15,5 @@
     <string name="btn_cos">cos(x)</string>
     <string name="btn_tan">tan(x)</string>
     <string name="swc_rad">Rad</string>
+    <string name="oper_hist">Operations history:\n</string>
 </resources>

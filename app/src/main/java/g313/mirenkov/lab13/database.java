@@ -22,11 +22,14 @@ public class database extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        String sql = "drop table if exists tablica";
+        sqLiteDatabase.execSQL(sql);
+        onCreate(sqLiteDatabase);
     }
 
     public void insert(String value) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        String sql = String.format("insert into tablica values('%s')", value);
+        String sql = String.format("insert into tablica values(value='%s')", value);
         sqLiteDatabase.execSQL(sql);
     }
 

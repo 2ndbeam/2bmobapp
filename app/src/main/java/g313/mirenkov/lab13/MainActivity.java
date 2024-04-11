@@ -11,19 +11,21 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView txt_x, txt_y, txt_out;
+    TextView txt_x, txt_y, txt_out, txt_hist;
     Switch swc_rad;
     boolean rad = false;
     final String url = "https://sbmobapi.shuttleapp.rs/";
+    public String operation = "";
     database db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        db = new database(this, "log.db", null, 1);
+        db = new database(this, "log.db", null, 2);
         txt_x = findViewById(R.id.txt_x);
         txt_y = findViewById(R.id.txt_y);
         txt_out = findViewById(R.id.txt_out);
+        txt_hist = findViewById(R.id.txt_hist);
         swc_rad = findViewById(R.id.swc_rad);
     }
 
@@ -31,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         String x = txt_x.getText().toString();
         String y = txt_y.getText().toString();
         String request_url = url;
-        String operation = "";
         Toast tst_one_arg = Toast.makeText(this, "Error: x is not set.", Toast.LENGTH_LONG);
         Toast tst_two_args = Toast.makeText(this, "Error: x or y are not set.", Toast.LENGTH_LONG);
         Toast tst_integer = Toast.makeText(this, "Error: x or y are not integer", Toast.LENGTH_LONG);
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch(NumberFormatException e) {
                     txt_out.setText(response);
                 }
+                db_log(txt_out.getText().toString());
             }
         };
         String button_id = getResources().getResourceName(v.getId()).replace("g313.mirenkov.lab13:id/", "");
@@ -205,15 +207,26 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         r.make_request(request_url);
-        db_log(operation, txt_out.getText().toString());
     }
 
     public void switch_radians(View v) {
         rad = swc_rad.isChecked();
     }
 
-    public void db_log(String operation, String response) {
+    public void db_log(String response) {
         String text = String.format("%s = %s", operation, response);
         db.insert(text);
+        upd_hist();
+    }
+
+    public void upd_hist() {
+        String history = getString(R.string.oper_hist);
+        int limit = 10;
+        int rows_count = db.get_rows_count();
+        if (rows_count < 10) limit = rows_count;
+        for (int i = rows_count; i <= rows_count - limit; i--) {
+            history += db.select(String.valueOf(i));
+        }
+        txt_hist.setText(history);
     }
 }
