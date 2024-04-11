@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         String y = txt_y.getText().toString();
         String request_url = url;
         String operation = "";
-        String response = "";
         Toast tst_one_arg = Toast.makeText(this, "Error: x is not set.", Toast.LENGTH_LONG);
         Toast tst_two_args = Toast.makeText(this, "Error: x or y are not set.", Toast.LENGTH_LONG);
         Toast tst_integer = Toast.makeText(this, "Error: x or y are not integer", Toast.LENGTH_LONG);
@@ -44,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("RESULT", response);
                 try {
                     double res = Double.parseDouble(response);
-                    txt_out.setText(String.format("%.4f", res));
+                    String sres = String.format("%.4f", res);
+                    txt_out.setText(sres);
                 } catch(NumberFormatException e) {
                     txt_out.setText(response);
                 }
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 request_url += String.format("add?first=%s&second=%s", x, y);
+                operation = String.format("%s + %s", x, y);
                 break;
             case "btn_sub":
                 if (x.equals("") || y.equals("")) {
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 request_url += String.format("sub?first=%s&second=%s", x, y);
+                operation = String.format("%s - %s", x, y);
                 break;
             case "btn_mul":
                 if (x.equals("") || y.equals("")) {
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 request_url += String.format("mul?first=%s&second=%s", x, y);
+                operation = String.format("%s * %s", x, y);
                 break;
             case "btn_div":
                 if (x.equals("") || y.equals("")) {
@@ -99,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 request_url += String.format("div?first=%s&second=%s", x, y);
+                operation = String.format("%s / %s", x, y);
                 break;
             case "btn_div2":
                 if (x.equals("") || y.equals("")) {
@@ -110,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 request_url += String.format("div2?first=%s&second=%s", x, y);
+                operation = String.format("%s // %s", x, y);
                 break;
             case "btn_rem":
                 if (x.equals("") || y.equals("")) {
@@ -121,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 request_url += String.format("rem?first=%s&second=%s", x, y);
+                operation = String.format("%s \u0025 %s", x, y);
                 break;
             case "btn_sqr":
                 if (x.equals("")) {
@@ -132,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 request_url += String.format("sqr?arg=%s", x);
+                operation = String.format("%s^2", x);
                 break;
             case "btn_sqrt":
                 if (x.equals("")) {
@@ -143,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 request_url += String.format("sqrt?arg=%s", x);
+                operation = String.format("sqrt(%s)", x);
                 break;
             case "btn_sin":
                 if (x.equals("")) {
@@ -155,8 +163,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (rad) {
                     request_url += String.format("sin/rad?arg=%s", x);
+                    operation = String.format("sin(%s rad)", x);
                 } else {
                     request_url += String.format("sin/deg?arg=%s", x);
+                    operation = String.format("sin(%s deg)", x);
                 }
                 break;
             case "btn_cos":
@@ -170,8 +180,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (rad) {
                     request_url += String.format("cos/rad?arg=%s", x);
+                    operation = String.format("cos(%s rad)", x);
                 } else {
                     request_url += String.format("cos/deg?arg=%s", x);
+                    operation = String.format("cos(%s deg)", x);
                 }
                 break;
             case "btn_tan":
@@ -185,13 +197,15 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (rad) {
                     request_url += String.format("tan/rad?arg=%s", x);
+                    operation = String.format("tan(%s rad)", x);
                 } else {
                     request_url += String.format("tan/deg?arg=%s", x);
+                    operation = String.format("tan(%s deg)", x);
                 }
                 break;
         }
         r.make_request(request_url);
-        db_log(operation, response);
+        db_log(operation, txt_out.getText().toString());
     }
 
     public void switch_radians(View v) {
