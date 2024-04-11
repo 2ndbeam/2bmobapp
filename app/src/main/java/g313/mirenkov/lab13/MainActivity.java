@@ -15,10 +15,12 @@ public class MainActivity extends AppCompatActivity {
     Switch swc_rad;
     boolean rad = false;
     final String url = "https://sbmobapi.shuttleapp.rs/";
+    database db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = new database(this, "log.db", null, 1);
         txt_x = findViewById(R.id.txt_x);
         txt_y = findViewById(R.id.txt_y);
         txt_out = findViewById(R.id.txt_out);
