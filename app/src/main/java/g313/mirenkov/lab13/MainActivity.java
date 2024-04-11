@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         Toast tst_integer = Toast.makeText(this, "Error: x or y are not integer", Toast.LENGTH_LONG);
         Toast tst_sign_arg = Toast.makeText(this, "Error: x or y contains only \"-\"", Toast.LENGTH_LONG);
         Toast tst_sign_arg_one = Toast.makeText(this, "Error: x contains only \"-\"", Toast.LENGTH_LONG);
+        boolean is_two_arg = true;
+        String trigo = "deg";
+        if (rad) trigo = "rad";
         HttpRequest r = new HttpRequest(this) {
             @Override
             public void on_request_complete(String response) {
@@ -57,156 +60,62 @@ public class MainActivity extends AppCompatActivity {
         String button_id = getResources().getResourceName(v.getId()).replace("g313.mirenkov.lab13:id/", "");
         switch(button_id) {
             case "btn_add":
-                if (x.equals("") || y.equals("")) {
-                    tst_two_args.show();
-                    return;
-                }
-                if (x.equals("-") || y.equals("-")) {
-                    tst_sign_arg.show();
-                    return;
-                }
                 request_url += String.format("add?first=%s&second=%s", x, y);
                 operation = String.format("%s + %s", x, y);
                 break;
             case "btn_sub":
-                if (x.equals("") || y.equals("")) {
-                    tst_two_args.show();
-                    return;
-                }
-                if (x.equals("-") || y.equals("-")) {
-                    tst_sign_arg.show();
-                    return;
-                }
                 request_url += String.format("sub?first=%s&second=%s", x, y);
                 operation = String.format("%s - %s", x, y);
                 break;
             case "btn_mul":
-                if (x.equals("") || y.equals("")) {
-                    tst_two_args.show();
-                    return;
-                }
-                if (x.equals("-") || y.equals("-")) {
-                    tst_sign_arg.show();
-                    return;
-                }
                 request_url += String.format("mul?first=%s&second=%s", x, y);
                 operation = String.format("%s * %s", x, y);
                 break;
             case "btn_div":
-                if (x.equals("") || y.equals("")) {
-                    tst_two_args.show();
-                    return;
-                }
-                if (x.equals("-") || y.equals("-")) {
-                    tst_sign_arg.show();
-                    return;
-                }
-                if (x.contains(".") || y.contains(".")) {
-                    tst_integer.show();
-                    return;
-                }
                 request_url += String.format("div?first=%s&second=%s", x, y);
                 operation = String.format("%s / %s", x, y);
                 break;
             case "btn_div2":
-                if (x.equals("") || y.equals("")) {
-                    tst_two_args.show();
-                    return;
-                }
-                if (x.equals("-") || y.equals("-")) {
-                    tst_sign_arg.show();
-                    return;
-                }
+                if (x.contains(".") || y.contains(".")) { tst_integer.show(); return; }
                 request_url += String.format("div2?first=%s&second=%s", x, y);
                 operation = String.format("%s // %s", x, y);
                 break;
             case "btn_rem":
-                if (x.equals("") || y.equals("")) {
-                    tst_two_args.show();
-                    return;
-                }
-                if (x.equals("-") || y.equals("-")) {
-                    tst_sign_arg.show();
-                    return;
-                }
                 request_url += String.format("rem?first=%s&second=%s", x, y);
                 operation = String.format("%s \u0025 %s", x, y);
                 break;
             case "btn_sqr":
-                if (x.equals("")) {
-                    tst_one_arg.show();
-                    return;
-                }
-                if (x.equals("-")) {
-                    tst_sign_arg_one.show();
-                    return;
-                }
+                is_two_arg = false;
                 request_url += String.format("sqr?arg=%s", x);
                 operation = String.format("%s^2", x);
                 break;
             case "btn_sqrt":
-                if (x.equals("")) {
-                    tst_one_arg.show();
-                    return;
-                }
-                if (x.equals("-")) {
-                    tst_sign_arg_one.show();
-                    return;
-                }
+                is_two_arg = false;
                 request_url += String.format("sqrt?arg=%s", x);
                 operation = String.format("sqrt(%s)", x);
                 break;
             case "btn_sin":
-                if (x.equals("")) {
-                    tst_one_arg.show();
-                    return;
-                }
-                if (x.equals("-")) {
-                    tst_sign_arg_one.show();
-                    return;
-                }
-                if (rad) {
-                    request_url += String.format("sin/rad?arg=%s", x);
-                    operation = String.format("sin(%s rad)", x);
-                } else {
-                    request_url += String.format("sin/deg?arg=%s", x);
-                    operation = String.format("sin(%s deg)", x);
-                }
+                is_two_arg = false;
+                request_url += String.format("sin/%s?arg=%s", trigo, x);
+                operation = String.format("sin(%s %s)", x, trigo);
                 break;
             case "btn_cos":
-                if (x.equals("")) {
-                    tst_one_arg.show();
-                    return;
-                }
-                if (x.equals("-")) {
-                    tst_sign_arg_one.show();
-                    return;
-                }
-                if (rad) {
-                    request_url += String.format("cos/rad?arg=%s", x);
-                    operation = String.format("cos(%s rad)", x);
-                } else {
-                    request_url += String.format("cos/deg?arg=%s", x);
-                    operation = String.format("cos(%s deg)", x);
-                }
+                is_two_arg = false;
+                request_url += String.format("cos/%s?arg=%s", trigo, x);
+                operation = String.format("cos(%s %s)", x, trigo);
                 break;
             case "btn_tan":
-                if (x.equals("")) {
-                    tst_one_arg.show();
-                    return;
-                }
-                if (x.equals("-")) {
-                    tst_sign_arg_one.show();
-                    return;
-                }
-                if (rad) {
-                    request_url += String.format("tan/rad?arg=%s", x);
-                    operation = String.format("tan(%s rad)", x);
-                } else {
-                    request_url += String.format("tan/deg?arg=%s", x);
-                    operation = String.format("tan(%s deg)", x);
-                }
+                is_two_arg = false;
+                request_url += String.format("tan/%s?arg=%s", trigo, x);
+                operation = String.format("tan(%s %s)", x, trigo);
                 break;
+        }
+        if (is_two_arg) {
+            if (x.equals("") || y.equals("")) { tst_two_args.show(); return; }
+            if (x.equals("-") || y.equals("-")) { tst_sign_arg.show(); return; }
+        } else {
+            if (x.equals("")) { tst_one_arg.show(); return; }
+            if (x.equals("-")) { tst_sign_arg_one.show(); return; }
         }
         r.make_request(request_url);
     }
