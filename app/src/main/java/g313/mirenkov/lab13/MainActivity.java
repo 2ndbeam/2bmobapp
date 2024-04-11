@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         txt_out = findViewById(R.id.txt_out);
         txt_hist = findViewById(R.id.txt_hist);
         swc_rad = findViewById(R.id.swc_rad);
+        upd_hist();
     }
 
     public void button_send_request(View v) {
@@ -224,8 +225,8 @@ public class MainActivity extends AppCompatActivity {
         int limit = 10;
         int rows_count = db.get_rows_count();
         if (rows_count < 10) limit = rows_count;
-        for (int i = rows_count; i <= rows_count - limit; i--) {
-            history += db.select(String.valueOf(i));
+        for (int i = rows_count; i > rows_count - limit; i--) {
+            history += String.format("%d.\t%s\n", i, db.select(String.valueOf(i)));
         }
         txt_hist.setText(history);
     }

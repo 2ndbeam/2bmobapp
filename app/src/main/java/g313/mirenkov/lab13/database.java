@@ -29,7 +29,7 @@ public class database extends SQLiteOpenHelper {
 
     public void insert(String value) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        String sql = String.format("insert into tablica values(value='%s')", value);
+        String sql = String.format("insert into tablica(value) values('%s')", value);
         sqLiteDatabase.execSQL(sql);
     }
 
