@@ -29,22 +29,115 @@ public class MainActivity extends AppCompatActivity {
         String x = txt_x.getText().toString();
         String y = txt_y.getText().toString();
         String request_url = url;
-        Toast tst1 = Toast.makeText(this, "Error: x is not set.", Toast.LENGTH_LONG);
-        Toast tst2 = Toast.makeText(this, "Error: x or y are not set.", Toast.LENGTH_LONG);
+        Toast tst_one_arg = Toast.makeText(this, "Error: x is not set.", Toast.LENGTH_LONG);
+        Toast tst_two_args = Toast.makeText(this, "Error: x or y are not set.", Toast.LENGTH_LONG);
+        Toast tst_integer = Toast.makeText(this, "Error: x or y are not integer", Toast.LENGTH_LONG);
         HttpRequest r = new HttpRequest(this) {
             @Override
             public void on_request_complete(String response) {
                 Log.e("RESULT", response);
-                txt_out.setText(response);
+                try {
+                    double res = Double.parseDouble(response);
+                    txt_out.setText(String.format("%.4f", res));
+                } catch(NumberFormatException e) {
+                    txt_out.setText(response);
+                }
             }
         };
         String button_id = getResources().getResourceName(v.getId()).replace("g313.mirenkov.lab13:id/", "");
         switch(button_id) {
             case "btn_add":
                 if (x.equals("") || y.equals("")) {
-                    tst1.show(); break;
+                    tst_two_args.show();
+                    break;
                 }
                 request_url += String.format("add?first=%s&second=%s", x, y);
+                break;
+            case "btn_sub":
+                if (x.equals("") || y.equals("")) {
+                    tst_two_args.show();
+                    break;
+                }
+                request_url += String.format("sub?first=%s&second=%s", x, y);
+                break;
+            case "btn_mul":
+                if (x.equals("") || y.equals("")) {
+                    tst_two_args.show();
+                    break;
+                }
+                request_url += String.format("mul?first=%s&second=%s", x, y);
+                break;
+            case "btn_div":
+                if (x.equals("") || y.equals("")) {
+                    tst_two_args.show();
+                    break;
+                }
+                if (x.contains(".") || y.contains(".")) {
+                    tst_integer.show();
+                    break;
+                }
+                request_url += String.format("div?first=%s&second=%s", x, y);
+                break;
+            case "btn_div2":
+                if (x.equals("") || y.equals("")) {
+                    tst_two_args.show();
+                    break;
+                }
+                request_url += String.format("div2?first=%s&second=%s", x, y);
+                break;
+            case "btn_rem":
+                if (x.equals("") || y.equals("")) {
+                    tst_two_args.show();
+                    break;
+                }
+                request_url += String.format("rem?first=%s&second=%s", x, y);
+                break;
+            case "btn_sqr":
+                if (x.equals("")) {
+                    tst_one_arg.show();
+                    break;
+                }
+                request_url += String.format("sqr?arg=%s", x);
+                break;
+            case "btn_sqrt":
+                if (x.equals("")) {
+                    tst_one_arg.show();
+                    break;
+                }
+                request_url += String.format("sqrt?arg=%s", x);
+                break;
+            case "btn_sin":
+                if (x.equals("")) {
+                    tst_one_arg.show();
+                    break;
+                }
+                if (rad) {
+                    request_url += String.format("sin/rad?arg=%s", x);
+                } else {
+                    request_url += String.format("sin/deg?arg=%s", x);
+                }
+                break;
+            case "btn_cos":
+                if (x.equals("")) {
+                    tst_one_arg.show();
+                    break;
+                }
+                if (rad) {
+                    request_url += String.format("cos/rad?arg=%s", x);
+                } else {
+                    request_url += String.format("cos/deg?arg=%s", x);
+                }
+                break;
+            case "btn_tan":
+                if (x.equals("")) {
+                    tst_one_arg.show();
+                    break;
+                }
+                if (rad) {
+                    request_url += String.format("tan/rad?arg=%s", x);
+                } else {
+                    request_url += String.format("tan/deg?arg=%s", x);
+                }
                 break;
         }
         r.make_request(request_url);
