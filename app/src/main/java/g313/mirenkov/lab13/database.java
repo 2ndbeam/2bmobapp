@@ -41,4 +41,14 @@ public class database extends SQLiteOpenHelper {
         }
         return cur.getString(0);
     }
+
+    public int get_rows_count() {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        String sql = "select id from tablica order by id desc limit 1";
+        Cursor cur = sqLiteDatabase.rawQuery(sql, null);
+        if (!cur.moveToFirst()) {
+            return -1;
+        }
+        return cur.getInt(0);
+    }
 }

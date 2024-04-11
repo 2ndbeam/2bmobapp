@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         String x = txt_x.getText().toString();
         String y = txt_y.getText().toString();
         String request_url = url;
+        String operation = "";
+        String response = "";
         Toast tst_one_arg = Toast.makeText(this, "Error: x is not set.", Toast.LENGTH_LONG);
         Toast tst_two_args = Toast.makeText(this, "Error: x or y are not set.", Toast.LENGTH_LONG);
         Toast tst_integer = Toast.makeText(this, "Error: x or y are not integer", Toast.LENGTH_LONG);
@@ -189,9 +191,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         r.make_request(request_url);
+        db_log(operation, response);
     }
 
     public void switch_radians(View v) {
         rad = swc_rad.isChecked();
+    }
+
+    public void db_log(String operation, String response) {
+        String text = String.format("%s = %s", operation, response);
+        db.insert(text);
     }
 }
