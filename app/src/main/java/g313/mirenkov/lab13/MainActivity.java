@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "btn_rem":
                 request_url += String.format("rem?first=%s&second=%s", x, y);
-                operation = String.format("%s \u0025 %s", x, y);
+                operation = String.format("%s rem %s", x, y);
                 break;
             case "btn_sqr":
                 is_two_arg = false;
